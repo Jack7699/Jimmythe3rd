@@ -6,8 +6,8 @@ import {
     ButtonStyle,
 } from 'discord.js';
 
-import { errorEmbed } from '../../utils/embeds.js';
-import { InteractionHelper } from '../../utils/interactionHelper.js';
+import { errorEmbed } from '../utils/embeds.js';
+import { InteractionHelper } from '../utils/interactionHelper.js';
 
 const ARMY_LEADER_ROLE_ID = '1543724880879427675';
 
