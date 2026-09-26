@@ -5,6 +5,10 @@ import {
 } from 'discord.js';
 
 import { logger } from '../../utils/logger.js';
+import {
+    parseRegistrationDateTime,
+    REGISTRATION_DATE_TIME_HELP,
+} from '../../utils/registerDateTime.js';
 
 const REVIEW_ROLE_IDS = [
     '1543710638025605270', // Chief Officer
@@ -61,18 +65,11 @@ export default [
                 });
             }
 
-            /*
-             * DATE/TIME
-             *
-             * Example:
-             * 2026-09-28T20:00:00+01:00
-             */
-            const startTime = new Date(dateTime);
+            const startTime = parseRegistrationDateTime(dateTime);
 
-            if (Number.isNaN(startTime.getTime())) {
+            if (!startTime) {
                 return interaction.reply({
-                    content:
-                        '❌ Invalid date/time. Use this format:\n`2026-09-28T20:00:00+01:00`',
+                    content: `❌ Invalid date/time. ${REGISTRATION_DATE_TIME_HELP}`,
                     ephemeral: true,
                 });
             }
