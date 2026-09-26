@@ -61,7 +61,7 @@ Create an application and bot in the [Discord Developer Portal](https://discord.
 
 Grant permissions for the features you plan to use. In particular, army role creation needs **Manage Roles**, accepted registrations need **Manage Events**, ticket setup needs **Manage Channels**, and moderation actions need their corresponding moderation permissions. Music also needs access to join and speak in voice channels. Keep the bot's role above roles it must manage.
 
-`/register` currently expects a date and time that JavaScript can parse, such as `2026-09-28T20:00:00+01:00`. A reviewer with one of the configured CPA Force review roles can accept or decline it. The scheduled event is created on acceptance, so the bot needs Manage Events permission at that point.
+`/register` accepts an ISO 8601 date and time such as `2026-09-28T20:00:00+01:00`, or a Discord timestamp such as `<t:1790622000:F>` (any Discord timestamp display style works). Invalid values are rejected when the command is submitted. A reviewer with one of the configured CPA Force review roles can accept or decline it. The scheduled event is created on acceptance, so the bot needs Manage Events permission at that point.
 
 ## Music
 
