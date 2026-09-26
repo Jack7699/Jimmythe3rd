@@ -7,6 +7,10 @@ import {
 } from 'discord.js';
 import { errorEmbed } from '../../utils/embeds.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
+import {
+    parseRegistrationDateTime,
+    REGISTRATION_DATE_TIME_HELP,
+} from '../../utils/registerDateTime.js';
 
 const ARMY_LEADER_ROLE_ID = '1543724880879427675';
 
@@ -35,7 +39,7 @@ export default {
         .addStringOption(option =>
             option
                 .setName('date_time')
-                .setDescription('Date and time of the battle')
+                .setDescription('ISO date/time or Discord timestamp, e.g. <t:1790622000:F>')
                 .setRequired(true)
         )
         .addStringOption(option =>
@@ -81,6 +85,13 @@ export default {
         const army = interaction.options.getString('army');
         const dateTime = interaction.options.getString('date_time');
         const type = interaction.options.getString('type');
+
+        if (!parseRegistrationDateTime(dateTime)) {
+            return InteractionHelper.safeReply(interaction, {
+                embeds: [errorEmbed('Invalid Date and Time', REGISTRATION_DATE_TIME_HELP)],
+                ephemeral: true,
+            });
+        }
 
         /*
          * CREATE REGISTRATION EMBED
